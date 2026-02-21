@@ -1,0 +1,63 @@
+<h1>Catálogo de Productos</h1>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<div style="margin-bottom: 20px;">
+    <a href="{% url 'product_create' %}">Añadir Nuevo Producto</a>
+</div>
+
+<form method="GET" action="{% url 'product_list' %}" style="margin-bottom: 20px;">
+    <input type="text" name="q" placeholder="Buscar por nombre..." value="{{ query }}">
+    <button type="submit">Buscar</button>
+    
+    {% if query %}
+        <a href="{% url 'product_list' %}" style="margin-left: 10px;">Limpiar filtro</a>
+    {% endif %}
+</form>
+
+<a href="{% url 'product_create' %}">Añadir Nuevo Producto</a>
+
+<table border="1">
+    <tr>
+        <th>Imagen</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" width="50">
+            {% else %}
+                Sin imagen
+            {% endif %}
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category.name }}</td>
+        <td>${{ product.price }}</td>
+        <td>
+            <a href="{% url 'product_edit' product.id %}">Editar</a> | 
+            <a href="{% url 'product_delete' product.id %}">Eliminar</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="6">
+            {% if query %}
+                No se encontraron productos que coincidan con "{{ query }}".
+            {% else %}
+                No hay productos en el catálogo.
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>

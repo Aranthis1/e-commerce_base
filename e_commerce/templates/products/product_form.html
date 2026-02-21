@@ -1,0 +1,34 @@
+<h1>{{ action }} Producto</h1>
+
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Guardar Producto</button>
+</form>
+<a href="{% url 'product_list' %}">Volver al catálogo</a>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    
+    {% if action == 'Crear' %}
+        <button type="submit" style="background-color: green; color: white;">
+            Crear Nuevo Producto
+        </button>
+    {% elif action == 'Editar' %}
+        <button type="submit" style="background-color: blue; color: white;">
+            Guardar Cambios
+        </button>
+    {% endif %}
+    
+</form>
+
+<a href="{% url 'product_list' %}">Cancelar y volver al catálogo</a>
