@@ -1,34 +1,38 @@
-<h1>{{ action }} Producto</h1>
+{% extends 'base.html' %}
+{% load static %}
 
-{% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-  </ul>
-{% endif %}
+{% block title %}{{ action }} Producto - Mi E-Commerce{% endblock %}
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Guardar Producto</button>
-</form>
-<a href="{% url 'product_list' %}">Volver al catálogo</a>
-
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% block content %}
+<div class="form-box">
+    <h2 style="margin-bottom: 20px; color: #2c3e50;">{{ action }} Producto</h2>
     
-    {% if action == 'Crear' %}
-        <button type="submit" style="background-color: green; color: white;">
-            Crear Nuevo Producto
-        </button>
-    {% elif action == 'Editar' %}
-        <button type="submit" style="background-color: blue; color: white;">
-            Guardar Cambios
-        </button>
-    {% endif %}
-    
-</form>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <div style="margin-top: 15px; text-align: center; background: #f8f9fa; padding: 10px; border-radius: 5px; border: 1px dashed #ccc;">
+            <p style="margin-bottom: 5px; font-size: 0.85rem; color: #666;">Vista previa de la imagen:</p>
+            
+            {% if form.instance.image %}
+                <img id="image-preview" src="{{ form.instance.image.url }}" alt="Vista previa" style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            {% else %}
+                <img id="image-preview" src="" alt="Vista previa" style="max-width: 200px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: none;">
+            {% endif %}
+        </div>
+        
+        <div style="display: flex; justify-content: space-between; margin-top: 25px;">
+            <a href="{% url 'product_list' %}" class="btn btn-secondary">Cancelar</a>
+            
+            {% if action == 'Crear' %}
+                <button type="submit" class="btn btn-success">Crear Producto</button>
+            {% elif action == 'Editar' %}
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            {% endif %}
+        </div>
+    </form>
+</div>
 
-<a href="{% url 'product_list' %}">Cancelar y volver al catálogo</a>
+<script src="{% static 'js/preview.js' %}"></script>
+{% endblock %}

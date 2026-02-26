@@ -3,13 +3,23 @@ from django.contrib import messages
 from django.db.models import Q
 from .models import Product
 from .forms import ProductForm
+from django.core.paginator import Paginator
 
 # /products/ (Listado)
 def product_list(request):
     query = request.GET.get('q', '')
-    products = Product.objects.all().select_related('category')
+    products_list = Product.objects.all().order_by('-id')
     if query:
         products = products.filter(name__icontains=query)
+    # --- CONFIGURACIÓN DE LA PAGINACIÓN ---
+    # Dividimos la lista en páginas de 5 productos cada una
+    paginator = Paginator(products_list, 5) 
+    
+    # Capturamos el número de página actual desde la URL (ej: ?page=2)
+    page_number = request.GET.get('page')
+    
+    # Obtenemos solo los productos de esa página
+    products = paginator.get_page(page_number)
     return render(request, 'products/product_list.html', {'products': products, 'query': query})
 
 # /products/create/ (Creación)

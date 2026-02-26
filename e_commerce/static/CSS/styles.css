@@ -1,0 +1,213 @@
+  /* --- RESET BÁSICO --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* --- MENÚ DE NAVEGACIÓN --- */
+        .navbar {
+            background-color: #7cb4eb;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: left;
+            align-items: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar a {
+            float: left;
+            color: #1c2142;
+            padding: 1rem 5%;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            background-color: #d4e2f0;
+            color: #333;
+        }
+        /* --- CONTENEDOR PRINCIPAL --- */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* --- BOTONES --- */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+            text-align: center;
+        }
+        .btn-primary { background-color: #3498db; color: white; }
+        .btn-primary:hover { background-color: #2980b9; }
+        .btn-success { background-color: #2ecc71; color: white; }
+        .btn-success:hover { background-color: #27ae60; }
+        .btn-danger { background-color: #e74c3c; color: white; }
+        .btn-danger:hover { background-color: #c0392b; }
+        .btn-secondary { background-color: #95a5a6; color: white; }
+        .btn-secondary:hover { background-color: #7f8c8d; }
+
+        /* --- TABLAS --- */
+        .table-wrapper {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden; /* Redondea los bordes de la tabla */
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        tr:hover { background-color: #fcfcfc; }
+        .img-thumbnail { border-radius: 5px; object-fit: cover; }
+
+        /* --- FORMULARIOS BÁSICOS Y BUSCADOR --- */
+        /* Reemplaza tu .search-bar actual con esto si quieres que estén pegados */
+        .search-bar {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            /* Redondeamos solo el lado izquierdo del input */
+            border-radius: 5px 0 0 5px; 
+            font-size: 1rem;
+            outline: none; /* Quita el borde azul feo al hacer clic */
+        }
+
+        .btn-search {
+            background-color: #2c3e50;
+            color: white;
+            /* Redondeamos solo el lado derecho del botón */
+            border-radius: 0 5px 5px 0; 
+            padding: 10px 25px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-search:hover {
+            background-color: #1a252f;
+        }
+        
+        /* --- CAJA DE FORMULARIO (Crear/Editar) --- */
+        .form-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-box p {
+            margin-bottom: 15px;
+        }
+        .form-box label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        .form-box input[type="text"], 
+        .form-box input[type="number"], 
+        .form-box textarea, 
+        .form-box select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-box textarea { resize: vertical; min-height: 100px; }
+
+        /* --- MENSAJES DEL SISTEMA --- */
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .alert.success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert.error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        
+        /* --- PAGINACIÓN --- */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+        }
+        .pagination a {
+            padding: 8px 12px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            text-decoration: none;
+            color: #3498db;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .pagination a:hover {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        .pagination .current {
+            padding: 8px 12px;
+            background-color: #2c3e50;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* --- UTILIDADES --- */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        /* Estilo exclusivo para el botón de buscar */
+        .btn-search {
+            background-color: #e8ad4e; /* Un color naranja/dorado para que resalte */
+            color: rgb(6, 0, 0);
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .btn-search:hover {
+            background-color: #e67e22; /* Un naranja más oscuro al pasar el mouse */
+            transform: scale(1.05); /* Se hace un poquito más grande al pasar el mouse */
+        }

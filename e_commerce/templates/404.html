@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página no encontrada</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Ocupa el 100% de la pantalla */
+            
+            /* --- Configuración de la imagen de fondo --- */
+            background-image: url("{% static 'img/404.png' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* --- Magia para posicionar el botón abajo --- */
+            display: flex;
+            justify-content: center; /* Lo centra horizontalmente */
+            align-items: flex-end;   /* Lo empuja hacia abajo */
+            padding-bottom: 50px;    /* Separación desde el borde inferior */
+            box-sizing: border-box;
+        }
+
+        .btn-inicio {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: #00bfff;
+            color: rgb(4, 0, 0);
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra para que resalte sobre cualquier fondo */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-inicio:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Efecto de acercamiento al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <a href="/" class="btn-inicio">Volver a la tienda</a>
+
+</body>
+</html>
