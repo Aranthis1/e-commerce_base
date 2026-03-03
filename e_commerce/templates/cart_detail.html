@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Mi Carrito - E-Commerce{% endblock %}
+
+{% block content %}
+<div class="form-box" style="max-width: 900px; margin-top: 40px;">
+    <h2 style="color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+        Resumen de tu Compra
+    </h2>
+
+    {% if cart_items %}
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+            <thead>
+                <tr style="background-color: #f8f9fa; text-align: left;">
+                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Producto</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Precio</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Cantidad</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-weight: bold;">
+                        {{ item.product.name }}
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">${{ item.price }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+        
+                            <a href="{% url 'cart_decrement' item.product.id %}" style="background-color: #e74c3c; color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">-</a>
+        
+                            <span style="font-size: 1.2rem; font-weight: bold; min-width: 30px; text-align: center;">
+                            {{ item.quantity }}
+                            </span>
+        
+                            <a href="{% url 'cart_add' item.product.id %}" style="background-color: #2ecc71; color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">+</a>
+        
+                        </div>
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; color: #27ae60; font-weight: bold;">
+                        ${{ item.total_price }}
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: center;">
+                        <a href="{% url 'cart_remove' item.product.id %}" style="color: #e74c3c; text-decoration: none; font-size: 1.5rem; transition: transform 0.2s; display: inline-block;" title="Eliminar producto">
+                            🗑️
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div style="text-align: right; font-size: 1.5rem; margin-bottom: 30px;">
+            <strong>Total a Pagar: <span style="color: #e74c3c;">${{ cart_total }}</span></strong>
+        </div>
+
+        <div style="display: flex; justify-content: space-between;">
+            <a href="{% url 'public_catalog' %}" class="btn btn-secondary">← Seguir Comprando</a>
+            <button class="btn btn-success" style="font-size: 1.2rem; padding: 10px 30px;">Proceder al Pago →</button>
+        </div>
+
+    {% else %}
+        <div style="text-align: center; padding: 40px;">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🛒</div>
+            <h3 style="color: #7f8c8d; margin-bottom: 20px;">Tu carrito está vacío</h3>
+            <a href="{% url 'public_catalog' %}" class="btn" style="background-color: #e8814e; color: #233141;">Ir a la Tienda</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

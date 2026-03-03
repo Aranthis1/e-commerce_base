@@ -5,12 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Mi E-Commerce{% endblock %}</title>
-    <link rel="stylesheet" href="../static/CSS/styles.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=9999">
 </head>
 <body>
 
     <nav class="navbar">
-            <a href="{% url 'product_list' %}">Catálogo</a>
+            <a href="{% url 'index' %}" class="navbar-brand">Inicio E-Commerce</a>
+            <a href="{% url 'public_catalog' %}">Tienda</a>
+            <a href="{% url 'cart_detail' %}" style="position: relative;">
+            Mi Carrito 
+        {% if request.session.cart %}
+            <span style="background-color: #e74c3c; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.75rem; position: absolute; top: -5px; right: -15px; font-weight: bold;">
+                {{ request.session.cart|length }}
+            </span>
+        {% endif %}
+    </a>
             <a href="{% url 'product_create' %}" class="btn btn-success">Nuevo Producto</a>
         </nav>
 

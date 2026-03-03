@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Tienda - E-Commerce{% endblock %}
+
+{% block content %}
+<div class="header-section" style="margin-top: 20px;">
+    <h2 style="color: #2c3e50; font-size: 2rem;">Nuestra Tienda</h2>
+</div>
+
+<form method="GET" action="{% url 'public_catalog' %}" class="search-bar">
+    <input type="text" name="q" placeholder="¿Qué estás buscando?" value="{{ query }}">
+    <button type="submit" class="btn btn-search">🔍 Buscar</button>
+    {% if query %}
+        <a href="{% url 'public_catalog' %}" class="btn btn-secondary">Limpiar</a>
+    {% endif %}
+</form>
+
+<div class="product-grid">
+    {% for product in products %}
+        <div class="product-card">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image">
+            {% else %}
+                <div class="no-image">📷 Sin imagen</div>
+            {% endif %}
+            
+            <div class="product-info">
+    <span class="product-category">{{ product.get_category_display }}</span>
+    <h3 class="product-title">{{ product.name }}</h3>
+    <p class="product-price">${{ product.price }}</p>
+    
+    <a href="{% url 'cart_add' product.id %}" class="btn btn-success" style="display: block; width: 100%; margin-top: auto; text-align: center; text-decoration: none;">
+        Añadir al carrito
+    </a>
+</div>
+        </div>
+    {% empty %}
+        <div style="grid-column: 1 / -1; text-align: center; padding: 50px; background: #fff; border-radius: 8px;">
+            <p style="font-size: 1.2rem; color: #7f8c8d;">No se encontraron productos en la tienda.</p>
+        </div>
+    {% endfor %}
+</div>
+
+{% if products.has_other_pages %}
+<div class="pagination">
+    {% if products.has_previous %}
+        <a href="?page=1{% if query %}&q={{ query }}{% endif %}">&laquo; Primera</a>
+        <a href="?page={{ products.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Anterior</a>
+    {% endif %}
+
+    <span class="current">
+        Página {{ products.number }} de {{ products.paginator.num_pages }}
+    </span>
+
+    {% if products.has_next %}
+        <a href="?page={{ products.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Siguiente</a>
+        <a href="?page={{ products.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Última &raquo;</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

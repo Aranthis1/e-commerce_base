@@ -1,0 +1,23 @@
+  {% extends 'base.html' %}
+
+{% block title %}Inicio - Panel E-Commerce{% endblock %}
+
+{% block content %}
+<div class="form-box" style="max-width: 800px; margin-top: 60px; text-align: center; padding: 50px 30px;">
+    
+    <div style="font-size: 4rem; margin-bottom: 20px;">📦</div>
+    
+    <h1 style="color: #2c3e50; font-size: 2.5rem; margin-bottom: 15px;">
+        Sistema de Gestión de E-Commerce
+    </h1>
+    
+    <p style="font-size: 1.2rem; color: #666; margin-bottom: 40px; line-height: 1.8;">
+        Bienvenido al panel de administración central. Desde aquí podrás gestionar el catálogo, 
+        controlar el stock disponible y organizar las categorías de tus productos de forma rápida y segura.
+    </p>
+    
+    <a href="{% url 'public_catalog' %}" style="background-color: #e74c3c; color: #233141; border: none; font-size: 1.2rem; padding: 15px 40px; border-radius: 30px; box-shadow: 0 4px 6px rgba(255, 87, 51, 0.4);">
+        Entrar al Catálogo de Productos
+    </a>
+</div>
+{% endblock %}
