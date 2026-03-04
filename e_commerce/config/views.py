@@ -6,27 +6,49 @@ from .models import Product
 from .forms import ProductForm
 from django.core.paginator import Paginator
 from decimal import Decimal
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.http import HttpResponseForbidden
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
+from django.contrib.auth import login
+from django.http import HttpResponse
+
+def es_admin_o_usuario(user):
+    # Si eres el superusuario (el que entra a /admin/), pasas SIEMPRE
+    if user.is_superuser or user.is_staff:
+        return True
+    # Si no, revisamos si estás en los grupos (sin importar mayúsculas)
+    return user.groups.filter(name__icontains='admin').exists() or \
+           user.groups.filter(name__icontains='usuario').exists()
 
 def index(request):
     return render(request, 'index.html')
 
 # /products/ (Listado)
+@login_required(login_url='login')
+#@user_passes_test(es_admin_o_usuario, login_url='index')
 def product_list(request):
     query = request.GET.get('q', '')
+    
+    # 1. Traemos TODOS los productos
     products_list = Product.objects.all().order_by('-id')
+    
+    # 2. Si hay una búsqueda, filtramos esa misma lista
     if query:
-        products = products.filter(name__icontains=query)
+        products_list = products_list.filter(name__icontains=query)
+        
     # --- CONFIGURACIÓN DE LA PAGINACIÓN ---
-    # Dividimos la lista en páginas de 5 productos cada una
+    # 3. Le pasamos al paginador la lista (ya sea filtrada o completa)
     paginator = Paginator(products_list, 5) 
     
     # Capturamos el número de página actual desde la URL (ej: ?page=2)
     page_number = request.GET.get('page')
     
-    # Obtenemos solo los productos de esa página
+    # Obtenemos solo los productos de esa página final
     products = paginator.get_page(page_number)
-    return render(request, 'products/product_list.html', {'products': products, 'query': query})
-
+    
+    # Nota: Asegúrate de que el archivo HTML esté dentro de la carpeta 'products' como indica esta ruta
+    return render(request, 'templates\products\product_list.html', {'products': products, 'query': query})
 # /products/create/ (Creación)
 def product_create(request):
     if request.method == 'POST':
@@ -161,3 +183,29 @@ def cart_decrement(request, product_id):
     
     # Redirigimos de vuelta al resumen de compra
     return redirect('cart_detail')
+
+def register(request):
+    # Si el usuario envió el formulario
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            # 1. Guardamos al nuevo usuario en la base de datos
+            user = form.save()
+            
+            # 2. Le asignamos automáticamente el grupo "Cliente"
+            try:
+                grupo_cliente = Group.objects.get(name='Cliente')
+                user.groups.add(grupo_cliente)
+            except Group.DoesNotExist:
+                pass # Por si olvidaste crear el grupo en el panel de admin
+            
+            # 3. Iniciamos su sesión automáticamente para que no tenga que volver a poner sus datos
+            login(request, user)
+            
+            # 4. Lo mandamos a la tienda a comprar
+            return redirect('public_catalog')
+    else:
+        # Si solo está visitando la página, le mostramos el formulario vacío
+        form = UserCreationForm()
+        
+    return render(request, 'registration/register.html', {'form': form})

@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings # Importar settings
 from django.conf.urls.static import static # Importar static
+from django.contrib.auth import views as auth_views
 from config import views
 
 urlpatterns = [
@@ -28,11 +29,13 @@ urlpatterns = [
     path('create/', views.product_create, name='product_create'),
     path('edit/<int:id>/', views.product_edit, name='product_edit'),
     path('delete/<int:id>/', views.product_delete, name='product_delete'),
-    path('products/', include('config.urls')),
     path('carrito/', views.cart_detail, name='cart_detail'),
     path('cart/add/<int:product_id>/', views.cart_add, name='cart_add'),
     path('cart/remove/<int:product_id>/', views.cart_remove, name='cart_remove'),
     path('cart/decrement/<int:product_id>/', views.cart_decrement, name='cart_decrement'),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
+    path('registro/', views.register, name='register'),
 ]
 
 # Esto permite ver las imágenes en el navegador durante el desarrollo

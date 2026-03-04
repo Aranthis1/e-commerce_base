@@ -6,10 +6,8 @@ class Product(models.Model):
     
     CATEGORY_CHOICES = [
         ('ELEC', 'Electrónica y Tecnología'),
-        ('ROPA', 'Ropa y Accesorios'),
-        ('HOGAR', 'Hogar y Muebles'),
-        ('DEPORTE', 'Deportes y Aire Libre'),
-        ('JUEGOS', 'Juguetes y Videojuegos'),
+        ('ACCE', 'Accesorios'),
+        ('JUEGOS', 'Videojuegos'),
         ('OTROS', 'Otros'),
     ]
 

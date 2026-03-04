@@ -128,3 +128,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Rutas de redirección para la autenticación
+LOGIN_REDIRECT_URL = 'index'  # A dónde va después de iniciar sesión
+LOGIN_URL = 'login'           # A dónde lo manda si intenta entrar a una página prohibida

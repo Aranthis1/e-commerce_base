@@ -12,7 +12,7 @@
         }
 
         /* --- MENÚ DE NAVEGACIÓN --- */
-        .navbar {
+        .nav-links {
             background-color: #C8B3FF;
             padding: 1rem 5%;
             display: flex;
@@ -20,7 +20,7 @@
             align-items: left;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .navbar a {
+        .nav-links a {
             float: left;
             color: #1c2142;
             padding: 1rem 5%;
@@ -28,7 +28,7 @@
             font-size: 1.5rem;
             font-weight: bold;
         }
-        .navbar a:hover {
+        .nav-linksr a:hover {
             background-color: #83688F;
             color: #ffffff;
         }
@@ -274,4 +274,24 @@
     justify-content: center;
     color: #95a5a6;
     border-bottom: 1px solid #eee;
+}
+
+/* --- ESTILOS DE LA BARRA DE NAVEGACIÓN --- */
+
+/* 1. Estilo base para los enlaces de texto */
+.nav-links a {
+    transition: color 0.3s ease, transform 0.2s ease; /* Hace que el cambio sea suave */
+    display: inline-block; /* Necesario para que el saltito funcione */
+}
+
+/* 2. El efecto Hover (al pasar el mouse) para los textos */
+.nav-links a:hover {
+    color: #83688F !important;
+    transform: translateY(-2px); /* Un saltito de 2 píxeles hacia arriba */
+}
+
+/* 3. El efecto Hover especial para los botones (los que tienen clase .btn) */
+.nav-links a.btn:hover, .nav-links button.btn:hover {
+    transform: scale(1.05); /* Los botones se hacen un 5% más grandes en lugar de saltar */
+    opacity: 0.9;
 }

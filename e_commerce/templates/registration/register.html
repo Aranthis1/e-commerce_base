@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Cuenta{% endblock %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin-top: 50px; margin-bottom: 50px;">
+    <div class="form-box" style="width: 100%; max-width: 400px; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">Registrarse</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 25px; line-height: 1.8;">
+                {{ form.as_p }}
+            </div>
+            
+            <button type="submit" class="btn btn-success" style="width: 100%; padding: 12px; font-size: 1.1rem; border-radius: 20px;">
+                Crear mi cuenta
+            </button>
+        </form>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <p>¿Ya tienes cuenta? <a href="{% url 'login' %}" style="color: #3498db; text-decoration: none; font-weight: bold;">Inicia Sesión aquí</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

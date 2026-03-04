@@ -66,3 +66,8 @@ python manage.py createsuperuser
 **Paso 6: Iniciar el servidor de desarrollo
 python manage.py runserver
 #Una vez que el servidor esté corriendo, abre tu navegador y visita: http://127.0.0.1:8000/products/. El sistema te pedirá que inicies sesión con las credenciales creadas en el Paso 5.
+
+## Usuarios para pruebas: 
+# cliente:juan_cliente contraseña:a9638527
+# usuario:lili_trabajadora contraseña:a9638527
+# admin:cloe_gerente contraseña:a9638527
