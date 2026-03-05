@@ -9,3 +9,6 @@ cambio en navbar, se rompio la pagina pero se arreglo separandola en 2 y se agre
 
 agregado el register.html
 
+administracion solo llevaba al index, arreglado indicando correctamente la carpeta contenedora
+
+cambio de colores en carrito

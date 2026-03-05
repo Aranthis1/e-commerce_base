@@ -38,10 +38,13 @@
     <div class="nav-links" style="background-color: #C8B3FF;display: flex; align-items: center; justify-content: flex-end; gap: 30px; width: 100%; flex-wrap: wrap;">
     
     <div style="display: flex; align-items: center; gap: 15px;">
+        <a href="{% url 'index' %}" style="text-decoration: none; font-weight: bold;">Inicio</a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 15px;">
         <a href="{% url 'public_catalog' %}" style="text-decoration: none; font-weight: bold;">Tienda</a>
         
         {% if request.user|has_group:"Admin" or request.user|has_group:"Usuario" or request.user.is_superuser %}
-            <a href="{% url 'product_list' %}" style="text-decoration: none;">Admin</a>
+            <a href="{% url 'product_list' %}" style="text-decoration: none;">Administración</a>
             <a href="{% url 'product_create' %}" class="btn btn-success" style="padding: 5px 15px; border-radius: 20px; font-size: 0.9rem;">+ Nuevo Producto</a>
         {% endif %}
     </div>

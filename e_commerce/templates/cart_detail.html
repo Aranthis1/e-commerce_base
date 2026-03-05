@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="form-box" style="max-width: 900px; margin-top: 40px;">
-    <h2 style="color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 20px;">
+    <h2 style="color: #2c3e50; border-bottom: 2px solid #060606; padding-bottom: 10px; margin-bottom: 20px;">
         Resumen de tu Compra
     </h2>
 
@@ -12,25 +12,25 @@
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
             <thead>
                 <tr style="background-color: #f8f9fa; text-align: left;">
-                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Producto</th>
-                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Precio</th>
-                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Cantidad</th>
-                    <th style="padding: 12px; border-bottom: 2px solid #ddd;">Subtotal</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #060606; ">Producto</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #060606;">Precio</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #060606;">Cantidad</th>
+                    <th style="padding: 12px; border-bottom: 2px solid #060606;">Subtotal</th>
                 </tr>
             </thead>
             <tbody>
                 {% for item in cart_items %}
                 <tr>
-                    <td style="padding: 12px; border-bottom: 1px solid #eee; font-weight: bold;">
+                    <td style="padding: 12px; border-bottom: 1px solid #060606; font-weight: bold; color: #2c3e50;">
                         {{ item.product.name }}
                     </td>
-                    <td style="padding: 12px; border-bottom: 1px solid #eee;">${{ item.price }}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #eee;">
+                    <td style="padding: 12px; border-bottom: 1px solid #060606; font-weight: bold; color: #2c3e50;">${{ item.price }}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #060606;">
                         <div style="display: flex; align-items: center; gap: 10px;">
         
                             <a href="{% url 'cart_decrement' item.product.id %}" style="background-color: #e74c3c; color: white; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">-</a>
         
-                            <span style="font-size: 1.2rem; font-weight: bold; min-width: 30px; text-align: center;">
+                            <span style="font-size: 1.2rem; font-weight: bold; min-width: 30px; text-align: center; font-weight: bold; color: #2c3e50;">
                             {{ item.quantity }}
                             </span>
         

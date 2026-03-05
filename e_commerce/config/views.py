@@ -48,7 +48,7 @@ def product_list(request):
     products = paginator.get_page(page_number)
     
     # Nota: Asegúrate de que el archivo HTML esté dentro de la carpeta 'products' como indica esta ruta
-    return render(request, 'templates\products\product_list.html', {'products': products, 'query': query})
+    return render(request, 'products/product_list.html', {'products': products, 'query': query})
 # /products/create/ (Creación)
 def product_create(request):
     if request.method == 'POST':

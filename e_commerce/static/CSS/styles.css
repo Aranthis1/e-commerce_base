@@ -11,27 +11,7 @@
             line-height: 1.6;
         }
 
-        /* --- MENÚ DE NAVEGACIÓN --- */
-        .nav-links {
-            background-color: #C8B3FF;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: left;
-            align-items: left;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .nav-links a {
-            float: left;
-            color: #1c2142;
-            padding: 1rem 5%;
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-        .nav-linksr a:hover {
-            background-color: #83688F;
-            color: #ffffff;
-        }
+       
         /* --- CONTENEDOR PRINCIPAL --- */
         .container {
             max-width: 1000px;
@@ -76,7 +56,7 @@
         th, td {
             padding: 15px;
             text-align: left;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #060606;
         }
         th {
             background-color: #f8f9fa;
